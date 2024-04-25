@@ -1,6 +1,6 @@
 import { styled } from "@mui/material";
 
-import { ImageSize } from "types";
+import { ImageSize } from "@/types";
 
 export const StyledContainer = styled("div")<{
   size?: ImageSize;

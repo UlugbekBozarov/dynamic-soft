@@ -1,6 +1,6 @@
 import { IconButton, styled } from "@mui/material";
 
-import { ImageSize } from "types";
+import { ImageSize } from "@/types";
 
 export const StyledImageBlock = styled("div", {
   shouldForwardProp: (prop) => !["size", "type"].includes(prop as string),

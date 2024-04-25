@@ -1,5 +1,5 @@
 import { FC, memo } from "react";
-import { IconProps } from "types";
+import { IconProps } from "@/types";
 
 const Delete: FC<IconProps> = ({
   width = "16",

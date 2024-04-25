@@ -1,6 +1,6 @@
 import { FC, memo } from "react";
 
-import { IconProps } from "types";
+import { IconProps } from "@/types";
 
 const ChevronRight: FC<IconProps> = ({
   width = "20",
