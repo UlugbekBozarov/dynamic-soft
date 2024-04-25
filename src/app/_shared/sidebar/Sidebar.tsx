@@ -1,4 +1,4 @@
-import React, { FC, Fragment } from "react";
+import { FC, Fragment } from "react";
 import {
   Box,
   Divider,
@@ -9,8 +9,9 @@ import {
 } from "@mui/material";
 import { get } from "lodash";
 
-import ListItem from "./ListItem";
 import { Users } from "@/assets/icons";
+
+import ListItem from "./ListItem";
 
 const DrawerContend = () => {
   // const handleCloseUserMenu = (item: SettingsItemType) => () => {
@@ -36,7 +37,7 @@ const DrawerContend = () => {
           {[
             {
               id: "users",
-              link: "/users",
+              link: "users",
               // disabled: true,
               labelKey: "Users",
               icon: <Users />,

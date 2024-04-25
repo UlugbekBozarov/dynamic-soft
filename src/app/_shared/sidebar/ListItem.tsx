@@ -1,4 +1,7 @@
+"use client";
+
 import { Fragment, ReactNode, FC } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import {
   Box,
   Collapse,
@@ -8,6 +11,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import { get } from "lodash";
+
 import { ChevronRight } from "@/assets/icons";
 
 interface ItemTpe {
@@ -24,25 +28,27 @@ interface ListItemProps {
 }
 
 const ListItem: FC<ListItemProps> = ({ item }) => {
+  const router = useRouter();
+
   let open = false;
 
-  // const goTo = (id: string, link: string) => () => {
-  //   if (get(item, "children")) {
-  //     // setOpen((prev) => !prev);
-  //     open = !open;
-  //   } else {
-  //     switch (id) {
-  //       case "logout": {
-  //         // clearCookie();
-  //         window.location.href = "/";
-  //         break;
-  //       }
-  //       default: {
-  //         // navigate(link);
-  //       }
-  //     }
-  //   }
-  // };
+  const goTo = (id: string, link: string) => () => {
+    if (get(item, "children")) {
+      // setOpen((prev) => !prev);
+      open = !open;
+    } else {
+      switch (id) {
+        case "logout": {
+          // clearCookie();
+          window.location.href = "/";
+          break;
+        }
+        default: {
+          router.push(link);
+        }
+      }
+    }
+  };
 
   // const childGoTo = (parentLink: string, childLink: string) => () => {};
 
@@ -50,6 +56,7 @@ const ListItem: FC<ListItemProps> = ({ item }) => {
     <Fragment>
       <ListItemButton
         disabled={get(item, "disabled", false)}
+        onClick={goTo(get(item, "id"), get(item, "link"))}
         key={get(item, "id")}
       >
         <ListItemIcon sx={{ display: "flex", justifyContent: "center" }}>
