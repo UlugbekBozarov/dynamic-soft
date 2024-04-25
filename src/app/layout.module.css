@@ -1,0 +1,8 @@
+.main {
+  width: calc(100% - 280px);
+  height: calc(100vh - 76px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin-top: 76px;
+  padding: 16px;
+}

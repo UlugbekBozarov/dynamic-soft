@@ -1,0 +1,5 @@
+.aside {
+  width: 280px;
+  border-right: 1px solid rgb(var(--callout-border-rgb));
+  padding: 16px;
+}
