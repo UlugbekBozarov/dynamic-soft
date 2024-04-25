@@ -1,23 +1,31 @@
-import { convertToParam } from "@/utils/converts";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { get, result } from "lodash";
+import { get } from "lodash";
 
 export type IUser = {
-  createdAt: String;
-  name: String;
-  avatar: String;
-  phoneNumber: String;
-  updatedAt: String;
-  address: String;
+  createdAt: string;
+  name: string;
+  avatar: string;
+  phoneNumber: string;
+  updatedAt: string;
+  address: string;
   status: boolean;
-  id: String;
+  id: string;
 };
 
 export type IUserRequest = {
-  name: String;
-  avatar?: String;
-  phoneNumber: String;
-  address?: String;
+  name: string;
+  avatar?: string;
+  phoneNumber: string;
+  address?: string;
+  status: boolean;
+};
+
+export type IUserEditRequest = {
+  id: string;
+  name: string;
+  avatar?: string;
+  phoneNumber: string;
+  address?: string;
   status: boolean;
 };
 
@@ -29,7 +37,7 @@ export const UsersApi = createApi({
   }),
   tagTypes: ["Users"],
   endpoints: (build) => ({
-    getUsers: build.query<IUsersResponse, Partial<String>>({
+    getUsers: build.query<IUsersResponse, Partial<string>>({
       query: (params) => `rest-api/users?${params}`,
       providesTags: (result) =>
         result
@@ -39,7 +47,7 @@ export const UsersApi = createApi({
             ]
           : [{ type: "Users", id: "LIST" }],
     }),
-    getUser: build.query<IUser, Partial<String>>({
+    getUser: build.query<IUser, Partial<string>>({
       query: (userId) => `rest-api/users/${userId}`,
       providesTags: (result) =>
         result
@@ -57,21 +65,15 @@ export const UsersApi = createApi({
       }),
       invalidatesTags: [{ type: "Users", id: "LIST" }],
     }),
-    editUser: build.mutation<
-      IUser,
-      Partial<{
-        id: String;
-        body: IUserRequest;
-      }>
-    >({
-      query: ({ id, body }) => ({
+    editUser: build.mutation<IUser, Partial<IUserEditRequest>>({
+      query: ({ id, ...body }) => ({
         url: `rest-api/users/${id}`,
         method: "PUT",
         body,
       }),
       invalidatesTags: [{ type: "Users", id: "LIST" }],
     }),
-    deleteUser: build.mutation<any, Partial<String>>({
+    deleteUser: build.mutation<any, Partial<string>>({
       query: (id) => ({
         url: `rest-api/users/${id}`,
         method: "DELETE",

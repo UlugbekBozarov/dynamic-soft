@@ -1,11 +1,12 @@
 "use client";
 
 import { memo } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Box, Breadcrumbs } from "@mui/material";
 
 import { Breadcrumb as BreadcrumbIcon } from "@/assets/icons";
 import Link from "next/link";
+import { StyledLink } from "./Breadcrumb.style";
 
 const Breadcrumb = () => {
   const pathname = usePathname();
@@ -37,10 +38,10 @@ const Breadcrumb = () => {
       aria-label="breadcrumb"
     >
       {array.map((item, index) => (
-        <Link href="/" key={`${item}_${index}`}>
+        <StyledLink href="/" key={`${item}_${index}`}>
           {item === "" ? <BreadcrumbIcon /> : ""}
           {item || "home"}
-        </Link>
+        </StyledLink>
       ))}
     </Breadcrumbs>
   );

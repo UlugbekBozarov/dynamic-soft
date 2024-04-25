@@ -1,5 +1,4 @@
 "use client";
-"use strict";
 
 import { Box, Button, TextField } from "@mui/material";
 import { debounce, get } from "lodash";
@@ -45,8 +44,6 @@ export default function Users() {
   useMemo(() => {
     refetch;
   }, [searchParams]);
-
-  const handleChangeParams = () => {};
 
   const handleChangeSearch = debounce((event) => {
     router.push(
@@ -121,7 +118,7 @@ export default function Users() {
             headerKey: "Created at",
             field: "createdAt",
             renderComponent: (item: IUser) => {
-              return dayjs(get(item, "createdAt", "")).format(
+              return dayjs(get(item, "createdAt")).format(
                 DATE_FORMAT.dateAndTime
               );
             },

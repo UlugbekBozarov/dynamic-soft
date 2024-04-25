@@ -6,7 +6,6 @@ import {
   ControlledSwitch,
 } from "@/components/form";
 import {
-  useAddUserMutation,
   useDeleteUserMutation,
   useEditUserMutation,
   useGetUserQuery,
@@ -21,14 +20,14 @@ import {
 } from "@mui/material";
 import { get } from "lodash";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 const FORM_NAMES = {
-  avatar: "avatar",
   name: "name",
   phoneNumber: "phoneNumber",
   address: "address",
+  avatar: "avatar",
   status: "status",
 };
 
@@ -47,10 +46,9 @@ const UserAddOrEdit = ({
     params.userId
   );
 
-  const [editUser, { isLoading, isError }] = useEditUserMutation();
+  const [editUser, { isLoading }] = useEditUserMutation();
 
-  const [deleteUser, { isLoading: isDeleteLoading, isError: isDeleteError }] =
-    useDeleteUserMutation();
+  const [deleteUser, { isLoading: isDeleteLoading }] = useDeleteUserMutation();
 
   const formStore = useForm({
     defaultValues: {
@@ -68,13 +66,11 @@ const UserAddOrEdit = ({
     try {
       await editUser({
         id: params?.userId,
-        body: {
-          [FORM_NAMES.name]: get(data, FORM_NAMES.name, ""),
-          [FORM_NAMES.phoneNumber]: get(data, FORM_NAMES.phoneNumber, ""),
-          [FORM_NAMES.address]: get(data, FORM_NAMES.address),
-          [FORM_NAMES.avatar]: get(data, FORM_NAMES.avatar),
-          [FORM_NAMES.status]: get(data, FORM_NAMES.status, false) as boolean,
-        },
+        [FORM_NAMES.avatar]: get(data, FORM_NAMES.avatar),
+        [FORM_NAMES.name]: get(data, FORM_NAMES.name, ""),
+        [FORM_NAMES.phoneNumber]: get(data, FORM_NAMES.phoneNumber, ""),
+        [FORM_NAMES.address]: get(data, FORM_NAMES.address),
+        [FORM_NAMES.status]: get(data, FORM_NAMES.status, false) as boolean,
       });
       router.back();
     } catch (error) {}
@@ -99,7 +95,7 @@ const UserAddOrEdit = ({
         [FORM_NAMES.phoneNumber]: get(byIdData, FORM_NAMES.phoneNumber, ""),
         [FORM_NAMES.address]: get(byIdData, FORM_NAMES.address, ""),
         [FORM_NAMES.avatar]: get(byIdData, FORM_NAMES.avatar, ""),
-        [FORM_NAMES.status]: get(byIdData, FORM_NAMES.status, ""),
+        [FORM_NAMES.status]: get(byIdData, FORM_NAMES.status, false),
       });
       setStarterLoading(false);
     }

@@ -1,6 +1,4 @@
 import { Fragment, ReactNode, FC } from "react";
-// import { useLocation, useNavigate } from "react-router-dom";
-// import { useTranslation } from "react-i18next";
 import {
   Box,
   Collapse,
@@ -10,10 +8,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import { get } from "lodash";
-// import { ChevronRight } from "assets/icons";
-// import { clearCookie } from "services/storage";
-
-// import { StyledIconBlock } from "./Sidebar.style";
+import { ChevronRight } from "@/assets/icons";
 
 interface ItemTpe {
   id: string;
@@ -29,38 +24,31 @@ interface ListItemProps {
 }
 
 const ListItem: FC<ListItemProps> = ({ item }) => {
-  // const { t } = useTranslation();
-  // const navigate = useNavigate();
-  // const location = useLocation();
   let open = false;
 
-  const goTo = (id: string, link: string) => () => {
-    if (get(item, "children")) {
-      // setOpen((prev) => !prev);
-      open = !open;
-    } else {
-      switch (id) {
-        case "logout": {
-          // clearCookie();
-          window.location.href = "/";
-          break;
-        }
-        default: {
-          // navigate(link);
-        }
-      }
-    }
-  };
+  // const goTo = (id: string, link: string) => () => {
+  //   if (get(item, "children")) {
+  //     // setOpen((prev) => !prev);
+  //     open = !open;
+  //   } else {
+  //     switch (id) {
+  //       case "logout": {
+  //         // clearCookie();
+  //         window.location.href = "/";
+  //         break;
+  //       }
+  //       default: {
+  //         // navigate(link);
+  //       }
+  //     }
+  //   }
+  // };
 
-  const childGoTo = (parentLink: string, childLink: string) => () => {
-    // navigate(`${parentLink}${childLink}`);
-  };
+  // const childGoTo = (parentLink: string, childLink: string) => () => {};
 
   return (
     <Fragment>
       <ListItemButton
-        // selected={location.pathname.startsWith(get(item, "link"))}
-        // onClick={goTo(get(item, "id"), get(item, "link"))}
         disabled={get(item, "disabled", false)}
         key={get(item, "id")}
       >
@@ -91,8 +79,7 @@ const ListItem: FC<ListItemProps> = ({ item }) => {
               },
             }}
           >
-            Icon
-            {/* <ChevronRight /> */}
+            <ChevronRight />
           </Box>
         )}
       </ListItemButton>

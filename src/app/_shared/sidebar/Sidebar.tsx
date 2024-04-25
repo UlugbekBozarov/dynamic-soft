@@ -10,6 +10,7 @@ import {
 import { get } from "lodash";
 
 import ListItem from "./ListItem";
+import { Users } from "@/assets/icons";
 
 const DrawerContend = () => {
   // const handleCloseUserMenu = (item: SettingsItemType) => () => {
@@ -38,7 +39,7 @@ const DrawerContend = () => {
               link: "/users",
               // disabled: true,
               labelKey: "Users",
-              //   icon: <Work />,
+              icon: <Users />,
             },
           ].map((item) => (
             <ListItem item={item} key={get(item, "id")} />

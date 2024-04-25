@@ -2,7 +2,7 @@
 
 import { Menu } from "@/assets/icons";
 import { AppBar, Box, IconButton, Toolbar } from "@mui/material";
-import React, { FC } from "react";
+import { FC } from "react";
 
 interface NavbarProps {
   drawerWidth?: number;
